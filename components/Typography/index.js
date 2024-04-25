@@ -4,3 +4,5 @@ export * from "./SectionSubheading";
 export * from "./SectionInnerHeading";
 export * from "./SectionParagraph";
 export * from "./SectionTinyHeading";
+export * from './CardTitle'
+export * from './CardDescription'

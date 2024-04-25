@@ -3,6 +3,8 @@ import { Button, SectionContainer, SectionBigHeading, SectionSubheading } from "
 
 export const StyledContainer = styled(({ height, ...props }) => <SectionContainer {...props} />)`
   align-items: center;
+  width:100%;
+  text-align:center
 `;
 
 export const StyledGetStartedBtn = styled((props) => <Button {...props} variant="contained" color="main" />)`
@@ -23,7 +25,8 @@ export const StyledDescription = styled((props) => <SectionSubheading {...props}
 export const StyledTextContainer = styled(({ ...props }) => <div {...props} />)`
   color: black;
   width: 30%;
-  margin-left: 11.125rem;
+  margin-left: auto;
+  margin-right:auto;
   font-family: sans-serif;
 `;
 
