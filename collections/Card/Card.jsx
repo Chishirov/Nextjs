@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   StyledCardBoxContainer,
   StyledCardTitle,
@@ -6,37 +6,57 @@ import {
   StyledTextContainer,
   StyledCardDescription,
 } from "./elements";
-import Image from 'next/image';
+import Image from "next/image";
 
 export const Card = ({ activeSelection, changeActiveSelection, ...card }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); 
+      setIsMobile(window.innerWidth <= 768);
     };
 
     handleResize();
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const isActive = card.title === activeSelection;
 
   return (
-    <StyledCardBoxContainer isactive={isActive} onClick={() => changeActiveSelection(card.title)}>
+    <StyledCardBoxContainer
+      isactive={isActive}
+      onClick={() => changeActiveSelection(card.title)}
+    >
       <StyledImageContainer>
-        <Image src={card.image.src} alt={card.image.alt} height={60} width={60} />
+        <Image
+          src={card.image.src}
+          alt={card.image.alt}
+          height={60}
+          width={60}
+        />
       </StyledImageContainer>
       <StyledTextContainer>
         <StyledCardTitle>{card.title}</StyledCardTitle>
-        {isMobile && <b style={{ color: "red", fontWeight: "bold", transform: "rotate(25deg)", position: "absolute", right: "20px" }}>{card.linkText}</b>}
+        {isMobile && (
+          <b
+            style={{
+              color: "red",
+              fontWeight: "bold",
+              transform: "rotate(15deg)",
+              position: "absolute",
+              right: "15px",
+            }}
+          >
+            {card.linkText}
+          </b>
+        )}
 
-
-
-        <StyledCardDescription dangerouslySetInnerHTML={{ __html: card.description }} />
+        <StyledCardDescription
+          dangerouslySetInnerHTML={{ __html: card.description }}
+        />
       </StyledTextContainer>
     </StyledCardBoxContainer>
   );
