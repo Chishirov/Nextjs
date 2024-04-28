@@ -40,18 +40,20 @@ export const Card = ({ activeSelection, changeActiveSelection, ...card }) => {
       </StyledImageContainer>
       <StyledTextContainer>
         <StyledCardTitle>{card.title}</StyledCardTitle>
-        {isMobile && (
-          <b
+        {isMobile && card.isMobileOnly && (
+          <div
             style={{
               color: "red",
               fontWeight: "bold",
               transform: "rotate(15deg)",
               position: "absolute",
-              right: "15px",
+              right: "20px",
             }}
           >
-            {card.linkText}
-          </b>
+            Link to brief
+            <br />
+            generator??
+          </div>
         )}
 
         <StyledCardDescription
