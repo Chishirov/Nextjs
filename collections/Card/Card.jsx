@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyledCardBoxContainer,
   StyledCardTitle,
@@ -10,9 +9,21 @@ import {
 import Image from 'next/image';
 
 export const Card = ({ activeSelection, changeActiveSelection, ...card }) => {
-  const isActive = card.title === activeSelection;
+  const [isMobile, setIsMobile] = useState(false);
 
-  const description = card.description.split('*');
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); 
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isActive = card.title === activeSelection;
 
   return (
     <StyledCardBoxContainer isactive={isActive} onClick={() => changeActiveSelection(card.title)}>
@@ -21,15 +32,12 @@ export const Card = ({ activeSelection, changeActiveSelection, ...card }) => {
       </StyledImageContainer>
       <StyledTextContainer>
         <StyledCardTitle>{card.title}</StyledCardTitle>
-        <StyledCardDescription>
-          {description.map((text, index) => (
-            <React.Fragment key={index}>
-              {index % 2 === 1 ? <b>{text}</b> : text}
-            </React.Fragment>
-          ))}
-        </StyledCardDescription>
+        {isMobile && <b style={{ color: "red", fontWeight: "bold", transform: "rotate(25deg)", position: "absolute", right: "20px" }}>{card.linkText}</b>}
+
+
+
+        <StyledCardDescription dangerouslySetInnerHTML={{ __html: card.description }} />
       </StyledTextContainer>
     </StyledCardBoxContainer>
   );
 };
-

@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import React from 'react';
+import { useState } from 'react';
 import { Card } from '../../collections'
 import {
   StyledCardContainer,
@@ -7,33 +8,36 @@ import {
   StyledImageContainer,
   StyledSectionContainer,
   StyledTitle,
-} from './elements'
+} from './elements';
 
-import Image from 'next/image'
+import Image from 'next/image';
+
 
 const cardProps = [
   {
     title: 'Brief',
-    description: 'Complete *brief* *writing* *or* *simple* *guidance* on what to include, we`ve got you covered. ',
+    description: 'Complete <b>brief</b> <b>writing or simple</b> <b>guidance</b> on what to include, we`ve got you covered. ',
     image: { src: "/img/workbench.svg", alt: "workbench icon", },
-   
+    isMobileOnly: true,
+    linkText: 'Link to brief generator??'
   },
   {
     title: 'Search',
-    description: 'In-depth agency search covering; *criteria* *matching*, door knocking and due-dilligence vetting.',
+    description: 'In-depth agency search covering; <b>criteria</b> <b>matching</b>, door knocking and due-dilligence vetting.',
     image: { src: "/img/presentation.svg", alt: "workbench icon", },
   },
   {
     title: 'Pitch',
-    description: 'Comprehensive *pitch* *management* including comms, diary management and pitch hosting.',
+    description: 'Comprehensive <b>pitch</b> <b>management</b> including comms, diary management and pitch hosting.',
     image: { src: "/img/talking.svg", alt: "workbench icon", },
   }
-]
+];
+
 
 export const AgencySection = ({ title, description, image }) => {
-  const [activeSelection, setActiveSelection] = useState('')
+  const [activeSelection, setActiveSelection] = useState('');
 
-  const changeActiveSelection = (value) => setActiveSelection(value)
+  const changeActiveSelection = (value) => setActiveSelection(value);
 
   return (
     <StyledContainer>
@@ -44,10 +48,19 @@ export const AgencySection = ({ title, description, image }) => {
           <Image src={image.src} alt='video image' layout="fill" objectFit="cover" />
         </StyledImageContainer>
         <StyledCardContainer>
-      
-          {cardProps.map((card) => <Card {...card} key={card.title} activeSelection={activeSelection} changeActiveSelection={changeActiveSelection} />)}
+          {cardProps.map((card) => (
+            <Card
+              {...card}
+              key={card.title}
+              activeSelection={activeSelection}
+              changeActiveSelection={changeActiveSelection}
+              isMobileOnly={card.isMobileOnly}
+            />
+          ))}
         </StyledCardContainer>
       </StyledSectionContainer>
     </StyledContainer>
-  )
-}
+  );
+};
+
+
